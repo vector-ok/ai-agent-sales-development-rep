@@ -1,7 +1,7 @@
 [project]
-name = "ai-business-customer-care"
+name = "ai-agent-sales-development-representative"
 version = "0.1.0"
-description = "AI agebt Business Customer Care Application"
+description = "AI agebt Sales Development Representative (SDR)"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
