@@ -1,0 +1,19 @@
+openai>=2.15.0,<3.0.0
+httpx>=0.24,<0.27
+pypdf>=6.6.0
+gradio>=4.0.0
+
+# openai==1.12.0
+# python-dotenv==1.0.0
+# requests==2.31.0
+# pypdf==3.17.4
+# gradio==4.16.0
+
+
+
+
+# gradio
+# openai-agents
+# pydantic
+# python-dotenv
+# httpx
