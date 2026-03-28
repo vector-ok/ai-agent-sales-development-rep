@@ -98,7 +98,7 @@ async def run_agent():
         "key-points": ["The email is a test", "it is sent by an agent"],
     }
 
-    message = f"Send email to {email_context['recipient_name']} about {email_context['topic']} and be sure to use available sender details"
+    message = f"Send email to {email_context['recipient_name']} about {email_context['topic']} and be sure to use available sender name"
     
     result = await Runner.run(agent, message)
     # return {"message": "Agent task completed", "result": result}
