@@ -21,6 +21,7 @@ RESEND_KEY= os.getenv("RESEND_API_KEY");
 RECIPIENT_NAME = os.getenv("RECIPIENT_NAME")
 EMAIL_FROM = os.getenv("EMAIL_FROM")
 EMAIL_TO = os.getenv("EMAIL_TO")
+ACCESS_TOKEN= os.getenv("ACCESS_TOKEN")
 # OPENAI_API_KEY= os.getenv("OPENAI_API_KEY")
 
 
