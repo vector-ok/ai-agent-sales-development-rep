@@ -1,4 +1,4 @@
-
+from fastapi import FastAPI
 from rich.console import Console
 import json
 from dotenv import load_dotenv
@@ -10,6 +10,10 @@ import asyncio
 import os
 
 load_dotenv(override=True)
+
+app = FastAPI() # <--- Vercel looks for this!
+
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 
 
 # In your env file, add your values for the following (including OPENAI_API_KEY):  
@@ -73,32 +77,34 @@ def send_email(body: str):
         print(f"An error occurred while sending the email: {str(e)}")
         return {"success": False, "message": f"Exception occurred: {str(e)}"}
     
+@app.get("/")
+async def root():
+    return {"status": "Agent is online"}
 
-# ready the agent    
-async def main():
-    print("Starting the email agent...")
-    
+@app.get("/run-agent")
+async def run_agent():
+    # This replaces your 'async def main()'
     agent = Agent(name="Send email agent", tools=[send_email])
     
     email_context = {
         "recipient_name": RECIPIENT_NAME,
         "sender_name": "Agent-SDR-007",
         "topic": "Testing Agent email sending",
-        "key-points": ["The email is a test", "it is sent by an agent", "No need to respond to the email"],
+        "key-points": ["The email is a test", "it is sent by an agent"],
     }
 
-    message = f"""
-    Send an email with the following details:
-    - Recipient: {email_context['recipient_name']}
-    - Topic: {email_context['topic']}
-    - Key points to include: {', '.join(email_context['key-points'])}
-    - Sender name:  {email_context['sender_name']}
-    """
+    message = f"Send email to {email_context['recipient_name']} about {email_context['topic']}"
     
     result = await Runner.run(agent, message)
+    # return {"message": "Agent task completed", "result": result}
+    
+    final_text = getattr(result, 'final_output', str(result))
+    
+    return {
+        "status": "success",
+        "agent_response": final_text 
+    }
         
-# start the emailing process 
-if __name__ == "__main__":
-    asyncio.run(main())
+
 
 
