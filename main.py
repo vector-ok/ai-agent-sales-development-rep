@@ -82,8 +82,11 @@ async def root():
     return {"status": "Agent is online"}
 
 @app.get("/run-agent")
-async def run_agent():
-    # This replaces your 'async def main()'
+async def run_agent(x_api_key: str = Header(None)):
+    # Check if the header 'x-api-key' matches your secret token
+    if x_api_key != ACCESS_TOKEN:
+        raise HTTPException(status_code=403, detail="Unauthorized access")
+    
     agent = Agent(name="Send email agent", tools=[send_email])
     
     email_context = {
@@ -93,7 +96,7 @@ async def run_agent():
         "key-points": ["The email is a test", "it is sent by an agent"],
     }
 
-    message = f"Send email to {email_context['recipient_name']} about {email_context['topic']}"
+    message = f"Send email to {email_context['recipient_name']} about {email_context['topic']} and be sure to use available sender details"
     
     result = await Runner.run(agent, message)
     # return {"message": "Agent task completed", "result": result}
