@@ -83,10 +83,11 @@ async def root():
     return {"status": "Agent is online"}
 
 @app.get("/run-agent")
-async def run_agent(x_api_key: str = Header(None)):
+async def run_agent():
+# async def run_agent(x_api_key: str = Header(None)):
     # Check if the header 'x-api-key' matches your secret token
-    if x_api_key != ACCESS_TOKEN:
-        raise HTTPException(status_code=403, detail="Unauthorized access")
+    # if x_api_key != ACCESS_TOKEN:
+    #     raise HTTPException(status_code=403, detail="Unauthorized access")
     
     agent = Agent(name="Send email agent", tools=[send_email])
     
