@@ -3,7 +3,7 @@ name = "ai-agent-sales-development-representative"
 version = "0.1.0"
 description = "AI agebt Sales Development Representative (SDR)"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.12"
 dependencies = [
    "gradio>=4.0.0",
    "openai>=2.15.0,<3.0.0",
