@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Header, HTTPException
 from rich.console import Console
 import json
 from dotenv import load_dotenv
